@@ -1,0 +1,29 @@
+%
+%  Name: Labelled Transition System
+%  For: obsidian notes
+%  Created: 2025-10-03
+%
+\documentclass{standalone}
+\input{setup.tex}
+\begin{document}
+
+\begin{tikzpicture}[>=stealth', shorten >=1pt,node distance=2cm,auto]
+  \tikzstyle{every state}=[style={scale=1.3},halcyon-base-grey-light]
+
+  \node        (l1) {};
+  \node[state]            (s0) [right of=l1, xshift=-8mm]  {$s_0$};
+  \node[state]            (s1) [above right of=s0]         {$s_1$};
+  \node[state, accepting, halcyon-accent] (s2) [right of=s1]               {$s_2$};
+  \node[state]            (s3) [below right of=s0]         {$s_3$};
+  \node[state]            (s4) [right of=s3]               {$s_4$};
+
+  %% L1 path
+  \path[->,halcyon-base-grey-dark]
+  (l1)  edge node {}    (s0)
+  (s0)  edge node {$a$} (s1)
+  (s1)  edge node {$c$} (s2)
+
+  (s0)  edge node {$b$} (s3)
+  (s3)  edge node {$\tau$} (s4);
+\end{tikzpicture}
+\end{document}

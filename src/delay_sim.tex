@@ -1,0 +1,48 @@
+%
+%  Name: Delay Simulation
+%  For: obsidian notes
+%  Created: 2025-10-03
+%
+\documentclass{standalone}
+\input{setup.tex}
+\begin{document}
+
+\begin{tikzpicture}[>=stealth', shorten >=1pt,node distance=2cm,auto]
+  \tikzstyle{every state}=[style={scale=1.3}]
+  %% L1
+  \node        (l1) {};
+  \node[state, halcyon-palette-orange] (s0) [below of=l1, yshift=8mm]  {$s_0$};
+  \node[state, halcyon-palette-yellow] (s1) [below of=s0]  {$s_1$};
+  \node[state, halcyon-palette-lime] (s2) [below of=s1]  {$s_2$};
+
+  %% Spacing
+  \node (space) [right of=l1] {};
+
+  %% L2
+  \node        (l2) [right of=space] {};
+  \node[state, halcyon-palette-orange] (p0) [below of=l2, yshift=8mm]    {$p_0$};
+  \node[state, halcyon-palette-yellow] (p1) [below of=p0]    {$p_1$};
+  \node[state, halcyon-palette-yellow] (p2) [below left of=p1, yshift=-6mm]  {$p_2$};
+  \node[state, halcyon-palette-lime] (p3) [below right of=p1,yshift=-6mm]  {$p_2$};
+  
+  %% L1 path
+  \path[->,halcyon-base-grey-dark]
+    (l1)  edge node {} (s0)
+	  (s0)  edge node {$a$} (s1)
+	  (s1)  edge node {$b$} (s2);
+	%% L2 path
+	\path[->,halcyon-base-grey-dark]
+	  (l2)  edge node {} (p0)
+	  (p0)  edge node {$a$} (p1)
+	  (p1)  edge node {$\tau$} (p2)
+	  (p1)  edge node {$b$} (p3)
+	  (p2)  edge node {$b$} (p3);
+	%% Bisim arrows
+	\path[dashed, <-, halcyon-base-grey-light] 
+	  (p0) edge node {} (s0)
+	  (p1) edge node {} (s1)
+	  (p2) edge node {} (s1);
+	\path[dashed, <-, halcyon-base-grey-light]
+	  (p3) edge[bend left] node {} (s2);
+\end{tikzpicture}
+\end{document}

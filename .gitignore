@@ -1,0 +1,11 @@
+# Ignore latex files
+*.aux
+*.log
+*.dvi
+*.fdb_latexmk
+*.synctex.gz
+*.fls
+
+# Ignore created image folders
+pdf/
+svg/
